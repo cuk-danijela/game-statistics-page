@@ -11,7 +11,7 @@
 
 .score {
   grid-column: 3 / span 1;
-    grid-row: 1;
+  grid-row: 1;
   border-radius: 15px;
   font-weight: 600;
   font-size: 24px;
@@ -25,22 +25,20 @@
 
 .team {
   grid-column: 3 / span 1;
-    grid-row: 2 / span 3;
+  grid-row: 2 / span 3;
   border-radius: 15px;
   margin-right: 35px;
   padding: 35px;
   text-transform: uppercase;
   display: flex;
-    align-items: start;
-    justify-content: center;
+  align-items: start;
+  justify-content: center;
 }
 
 .donuts {
   grid-column: 1 / span 2;
-    grid-row: 1 / span 2;
+  grid-row: 1 / span 2;
   border-radius: 15px;
-  /* width: 594px;
-  height: 340px; */
   font-weight: 500;
   font-size: 32px;
   line-height: 30px;
@@ -54,9 +52,6 @@
 .court {
   grid-column: 1 / span 2;
   grid-row: 3 / span 3;
-  /* width: 594px;
-  height: 340px; */
-  background: #313032;
   border-radius: 13px;
   font-weight: 500;
   font-size: 32px;
@@ -80,4 +75,14 @@
   justify-content: center;
   margin: 0 36px 0 15px;
   padding: 192px 10px 228px 10px;
+}
+
+.table {
+  grid-column: 1 / span 3;
+  height: 525.73px;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  margin: 22px 36px 44px 15px;
+  padding: 111px 0 111px 0;
 }

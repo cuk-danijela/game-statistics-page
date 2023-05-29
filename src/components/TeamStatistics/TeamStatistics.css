@@ -1,0 +1,48 @@
+table {
+    width: 100%;
+    border-spacing: 0;
+    border-collapse: separate;
+    border-radius: 10px;
+}
+
+th {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 11.2px;
+    line-height: 23px;
+    height: 36px;
+    text-align: center;
+    letter-spacing: 0.02em;
+    color: #A5A5A5;
+    background-color: #212121;
+}
+
+thead,
+td {
+    text-align: center;
+    padding: 8px;
+    height: 50px;
+    border-bottom: 1px solid #000;
+}
+
+tr:nth-child(even) {
+    background-color: #2F2D2F;
+}
+
+.avatar {
+    width: 35px;
+    height: 35px;
+    border-radius: 50px;
+}
+
+.no-avatar {
+    background-color: #25B8A6;
+    color: #fff;
+    width: 35px;
+    height: 35px;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+}

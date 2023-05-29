@@ -1,6 +1,7 @@
 body {
   margin: 0;
   font-family: 'Quicksand', sans-serif;
+  font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
