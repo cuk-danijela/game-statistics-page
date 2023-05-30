@@ -31,7 +31,7 @@
   padding: 35px;
   text-transform: uppercase;
   display: flex;
-  align-items: start;
+  align-items: flex-start;
   justify-content: center;
 }
 
