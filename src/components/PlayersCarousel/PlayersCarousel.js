@@ -1,28 +1,37 @@
+import React, { useState } from 'react';
 import './PlayersCarousel.css';
-import React from 'react';
-import { MDBCarousel, MDBCarouselItem } from 'mdb-react-ui-kit';
+import Carousel from 'react-bootstrap/Carousel';
 
-const PlayersCarousel = ({ teamData, selectedPlayer, onPlayerSelect }) => {
-    if (!teamData || !teamData.playersStats || teamData.playersStats.length === 0) {
-        return <p>No team data available.</p>;
-    }
+const PlayersCarousel = ({ teamData, playersStats, handlePlayerSelect }) => {
+    const [selectedPlayer, setSelectedPlayer] = useState(null);
 
-    const handlePlayerSelect = (playerId) => {
-        onPlayerSelect(playerId);
+    const handleCarouselPlayerSelect = (playerId) => {
+        setSelectedPlayer(playerId);
+        handlePlayerSelect(playerId);
     };
 
     return (
-        <MDBCarousel showControls showIndicators>
-            {teamData.playersStats.map((player) => (
-                <MDBCarouselItem key={player.id} className="w-100 d-block">
-                    <img src={player.avatar} alt={player.firstName} />
-                    <div className={selectedPlayer === player.id ? 'selected' : ''}>
-                        <h5>{player.firstName} {player.lastName}</h5>
+        <>
+            {playersStats?.map((player) => (
+                <Carousel.Item key={player.id}>
+                    {player.avatar && (
+                        <img className="d-block w-100" src={player.avatar} alt={player.firstName} />
+                    )}
+                    <div
+                        className={`player ${selectedPlayer === player.id ? 'active' : ''}`}
+                        onClick={() => handleCarouselPlayerSelect(player.id)}
+                    ></div>
+                    <Carousel.Caption>
+                        <h3>
+                            <h5>
+                                {player.firstName} {player.lastName}
+                            </h5>
+                        </h3>
                         <p>Number: {player.number}</p>
-                    </div>
-                </MDBCarouselItem>
+                    </Carousel.Caption>
+                </Carousel.Item>
             ))}
-        </MDBCarousel>
+        </>
     );
 };
 

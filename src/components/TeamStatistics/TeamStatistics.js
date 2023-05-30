@@ -155,9 +155,7 @@ const TeamStatistics = ({ teamData, selectedPlayer, playersStats }) => {
                             <td>{teamStats.totalBS}</td>
                         </tr>
                         {sortedPlayersStats.map((player) => (
-                            <tr
-                                key={player.id}
-                                className={selectedPlayer === player.id ? 'highlighted' : ''}
+                            <tr key = {player.id} className={selectedPlayer === player.id ? 'highlighted' : ''}
                             >
                                 <td>{player.number && <div className='num'>{player.number}</div>}</td>
                                 <td>

@@ -29,10 +29,6 @@
   border-radius: 15px;
   margin-right: 35px;
   padding: 35px;
-  text-transform: uppercase;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
 }
 
 .donuts {

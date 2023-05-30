@@ -49,16 +49,16 @@ tr:nth-child(even) {
 }
 
 .avatar {
-    width: 35px;
-    height: 35px;
+    width: 50px;
+    height: 50px;
     border-radius: 50px;
 }
 
 .no-avatar {
     background-color: #25B8A6;
     color: #fff;
-    width: 35px;
-    height: 35px;
+    width: 50px;
+    height: 50px;
     border-radius: 50px;
     display: flex;
     align-items: center;
@@ -72,4 +72,8 @@ tr:nth-child(even) {
 
 .align-left {
     text-align: left;
+}
+
+.highlighted {
+    background-color: #1dc0a699;
 }
