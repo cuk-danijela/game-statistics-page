@@ -42,12 +42,11 @@ function App() {
       <div className="grid-item donuts">Donuts Placeholder</div>
       <div className="grid-item court">Court Placeholder</div>
       <div className="grid-item bars">Bars Placeholder</div>
-      <div className="grid-item table">
         <TeamStatistics
           playersStats={playersStats}
           teamData={teamData}
           selectedPlayer={selectedPlayer}
-        /></div>
+        />
     </div>
   );
 }
