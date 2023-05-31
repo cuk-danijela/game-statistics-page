@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import "./App.css";
 import PlayersCarousel from "./components/PlayersCarousel/PlayersCarousel";
 import TeamStatistics from "./components/TeamStatistics/TeamStatistics";
+import "./App.css";
 
 function App() {
 
   const [playersStats, setPlayersStats] = useState([]);
-  const [teamData, setTeamData] = useState(null);
-  const [gameData, setGameData] = useState(null);
+  const [teamData, setTeamData] = useState({});
+  const [gameData, setGameData] = useState({});
   const [selectedPlayerId, setSelectedPlayer] = useState(null);
 
   useEffect(() => {
@@ -35,20 +35,22 @@ function App() {
   };
 
   return (
-    <div className="grid-container">
-      <div className="grid-item score">Score Placeholder</div>
-      <div className="grid-item team">
-        <PlayersCarousel
-          teamData={teamData}
-          gameData={gameData}
-          playersStats={playersStats}
-          selectedPlayerId={selectedPlayerId}
-          handlePlayerSelect={handlePlayerSelect}
-        />
+    <div className="gridContainer">
+      <div className="gridItem score">Score Placeholder</div>
+      <div className="gridItem team">
+        {playersStats.length > 0 && (
+          <PlayersCarousel
+            teamData={teamData}
+            gameData={gameData}
+            playersStats={playersStats}
+            selectedPlayerId={selectedPlayerId}
+            handlePlayerSelect={handlePlayerSelect}
+          />
+        )}
       </div>
-      <div className="grid-item donuts">Donuts Placeholder</div>
-      <div className="grid-item court">Court Placeholder</div>
-      <div className="grid-item bars">Bars Placeholder</div>
+      <div className="gridItem donuts">Donuts Placeholder</div>
+      <div className="gridItem court">Court Placeholder</div>
+      <div className="gridItem bars">Bars Placeholder</div>
       {teamData && (
         <TeamStatistics
           playersStats={playersStats}

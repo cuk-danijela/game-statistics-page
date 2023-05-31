@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './TeamStatistics.css';
 
 const TeamStatistics = ({ playersStats, teamData, selectedPlayerId }) => {
+
     const [sortColumn, setSortColumn] = useState('');
     const [sortOrder, setSortOrder] = useState('');
 
@@ -21,34 +22,22 @@ const TeamStatistics = ({ playersStats, teamData, selectedPlayerId }) => {
     };
 
     const sortArrow = (column) => {
-        if (sortColumn === column) {
-            return sortOrder === 'asc' ? <span>&#9650;</span> : <span>&#9660;</span>;
-        }
-        return null;
+        return sortColumn === column ? (sortOrder === 'asc' ? <span>&#9650;</span> : <span>&#9660;</span>) : null;
     };
 
     const sortPlayersStats = () => {
         const sortedStats = [...playersStats];
 
         sortedStats.sort((a, b) => {
-            let columnA = 0;
-            let columnB = 0;
+            const columnA = sortColumn === 'PTS'
+                ? (a.stats['3 PTS'] || 0) + (a.stats.FT || 0) + (a.stats.FG || 0)
+                : a.stats[sortColumn] || 0;
+            const columnB = sortColumn === 'PTS'
+                ? (b.stats['3 PTS'] || 0) + (b.stats.FT || 0) + (b.stats.FG || 0)
+                : b.stats[sortColumn] || 0;
 
-            if (sortColumn === 'PTS') {
-                columnA = (a.stats['3 PTS'] || 0) + (a.stats.FT || 0) + (a.stats.FG || 0);
-                columnB = (b.stats['3 PTS'] || 0) + (b.stats.FT || 0) + (b.stats.FG || 0);
-            } else {
-                columnA = a.stats[sortColumn] || 0;
-                columnB = b.stats[sortColumn] || 0;
-            }
-
-            if (sortOrder === 'asc') {
-                return columnA - columnB;
-            } else {
-                return columnB - columnA;
-            }
+            return sortOrder === 'asc' ? columnA - columnB : columnB - columnA;
         });
-
         return sortedStats;
     };
 
@@ -134,7 +123,7 @@ const TeamStatistics = ({ playersStats, teamData, selectedPlayerId }) => {
                             <td>
                                 <img src={teamData && teamData.logo} alt="Team Logo" className="avatar" />
                             </td>
-                            <td className="align-left">{teamData && teamData.name}</td>
+                            <td className="alignLeft">{teamData && teamData.name}</td>
                             <td>{teamStats.PTS}</td>
                             <td>{teamStats.FT}</td>
                             <td>{teamStats.FG}</td>
@@ -153,10 +142,10 @@ const TeamStatistics = ({ playersStats, teamData, selectedPlayerId }) => {
                                     {player.avatar ? (
                                         <img src={player.avatar} alt="avatar" className="avatar" />
                                     ) : (
-                                        <div className="no-avatar">{getInitials(player.firstName, player.lastName)}</div>
+                                            <div className="noAvatar">{getInitials(player.firstName, player.lastName)}</div>
                                     )}
                                 </td>
-                                <td className="align-left">{`${player.firstName} ${player.lastName}`}</td>
+                                <td className="alignLeft">{`${player.firstName} ${player.lastName}`}</td>
                                 <td>{(player.stats['3 PTS'] || 0) + (player.stats.FT || 0) + (player.stats.FG || 0)}</td>
                                 <td>{player.stats.FT || 0}</td>
                                 <td>{player.stats.FG || 0}</td>

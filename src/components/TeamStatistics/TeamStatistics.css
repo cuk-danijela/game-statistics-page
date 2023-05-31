@@ -54,7 +54,7 @@ tr:nth-child(even) {
     border-radius: 50px;
 }
 
-.no-avatar {
+.noAvatar {
     background-color: #25B8A6;
     color: #fff;
     width: 50px;
@@ -70,7 +70,7 @@ tr:nth-child(even) {
     cursor: pointer;
 }
 
-.align-left {
+.alignLeft {
     text-align: left;
 }
 

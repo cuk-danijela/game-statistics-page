@@ -1,10 +1,10 @@
 import React from 'react';
 import Carousel from 'react-bootstrap/Carousel';
-import './PlayersCarousel.css';
 import placeholderImg from '../../assets/placeholder.png';
+import './PlayersCarousel.css';
 
 const PlayersCarousel = ({ teamData, gameData, playersStats, selectedPlayerIndex, handlePlayerSelect }) => {
-    
+
     const getFormattedDate = (dateStr) => {
         const date = new Date(dateStr);
         const options = {
@@ -21,7 +21,7 @@ const PlayersCarousel = ({ teamData, gameData, playersStats, selectedPlayerIndex
 
     return (
         <Carousel
-            className="custom-carousel"
+            className="customCarousel"
             interval={null}
             fade
             activeIndex={selectedPlayerIndex}
@@ -33,8 +33,8 @@ const PlayersCarousel = ({ teamData, gameData, playersStats, selectedPlayerIndex
                 {teamData ? (
                     <>
                         <h6>ALL TEAM</h6>
-                        <div className="image-container">
-                            <img className="d-block slider-img" src={teamData.logo || placeholderImg} alt={teamData.name} />
+                        <div className="imageContainer">
+                            <img className="d-block sliderImg" src={teamData.logo || placeholderImg} alt={teamData.name} />
                         </div>
                         <Carousel.Caption>
                             <h4>{teamData.name} VS {gameData.awayTeamName}</h4>
@@ -50,8 +50,8 @@ const PlayersCarousel = ({ teamData, gameData, playersStats, selectedPlayerIndex
             {playersStats?.map((player, index) => (
                 <Carousel.Item key={player.id} className={selectedPlayerIndex === index ? 'selected' : ''}>
                     <h6 className='invisible'>ALL TEAM</h6>
-                    <div className="image-container">
-                        <img className="d-block slider-img" src={player.avatar || placeholderImg} alt={player.firstName} />
+                    <div className="imageContainer">
+                        <img className="d-block sliderImg" src={player.avatar || placeholderImg} alt={player.firstName} />
                     </div>
                     <Carousel.Caption>
                         <h4>{player.firstName} {player.lastName}</h4>

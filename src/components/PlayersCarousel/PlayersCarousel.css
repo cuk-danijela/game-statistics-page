@@ -1,4 +1,4 @@
-.image-container {
+.imageContainer{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -7,7 +7,7 @@
     margin: 4rem 0;
 }
 
-.slider-img {
+.sliderImg {
     width: 150px;
     height: 150px;
     border-radius: 50%;
@@ -15,7 +15,7 @@
     background-color: #59565a24;
 }
 
-.custom-carousel {
+.customCarousel {
     width: 450px;
     margin: 0 auto;
 }

@@ -1,18 +1,30 @@
-.grid-container {
+.gridContainer {
   display: grid;
   gap: 20px;
   color: #fff;
   background-color: #1E1E1E;
 }
 
-.grid-item {
+.gridItem {
   background-color: #313032;
 }
 
-.score {
-  grid-column: 3 / span 1;
-  grid-row: 1;
+.score,
+.team,
+.donuts,
+.court,
+.bars,
+.table {
   border-radius: 15px;
+}
+
+.score,
+.team {
+  grid-column: 3 / span 1;
+}
+
+.score {
+  grid-row: 1;
   font-weight: 600;
   font-size: 24px;
   line-height: 30px;
@@ -24,46 +36,40 @@
 }
 
 .team {
-  grid-column: 3 / span 1;
   grid-row: 2 / span 4;
-  border-radius: 15px;
   margin-right: 35px;
   padding: 35px;
   text-align: center;
 }
 
-.donuts {
+.donuts,
+.court {
   grid-column: 1 / span 2;
-  grid-row: 1 / span 2;
-  border-radius: 15px;
   font-weight: 500;
   font-size: 32px;
   line-height: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
+  
+}
+
+.donuts {
+  grid-row: 1 / span 2;
   margin: 74px 0 0 15px;
   padding: 68px 0 79px 0;
 }
 
 .court {
-  grid-column: 1 / span 2;
   grid-row: 3 / span 3;
   border-radius: 13px;
-  font-weight: 500;
-  font-size: 32px;
-  line-height: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   margin-left: 15px;
   padding: 114px 10px 129px 10px;
 }
 
-.bars {
+.bars,
+.table {
   grid-column: 1 / span 3;
-  height: 525.73px;
-  border-radius: 15px;
   font-weight: 500;
   font-size: 48px;
   line-height: 30px;
@@ -71,15 +77,13 @@
   align-items: center;
   justify-content: center;
   margin: 0 36px 0 15px;
+  height: 526px;
+}
+
+.bars {
   padding: 192px 10px 228px 10px;
 }
 
 .table {
-  grid-column: 1 / span 3;
-  height: 525.73px;
-  border-radius: 15px;
-  display: flex;
-  align-items: center;
-  margin: 22px 36px 44px 15px;
-  padding: 111px 0 111px 0;
+  padding: 111px 0;
 }
