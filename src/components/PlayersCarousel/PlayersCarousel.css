@@ -1,0 +1,42 @@
+.image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.slider-img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    padding: 20px;
+        background-color: #5b555b;
+}
+
+
+
+.players-carousel-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.player-details {
+    margin-top: 20px;
+    /* Prilagodite razmak između carousela i teksta prema potrebama */
+}
+
+.player {
+    cursor: pointer;
+}
+
+.player.active {
+    /* Stilovi za trenutno selektovanog igrača */
+}
+
+.carousel-caption {
+    position: relative;
+    right: 0;
+        bottom: 0;
+        left: 0;
+}
