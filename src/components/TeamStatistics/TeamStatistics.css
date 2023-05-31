@@ -73,7 +73,6 @@ tr:nth-child(even) {
 .align-left {
     text-align: left;
 }
-
-.highlighted {
-    background-color: #1dc0a699;
+.selected {
+    background-color: #1dc0a699 !important;
 }

@@ -1,43 +1,63 @@
-import React, { useState } from 'react';
-import './PlayersCarousel.css';
+import React from 'react';
 import Carousel from 'react-bootstrap/Carousel';
-import placeholderImage from '../../assets/placeholder.png'
+import './PlayersCarousel.css';
+import placeholderImg from '../../assets/placeholder.png';
 
+const PlayersCarousel = ({ teamData, gameData, playersStats, selectedPlayerIndex, handlePlayerSelect }) => {
+    const getFormattedDate = (dateStr) => {
+        const date = new Date(dateStr);
+        const options = {
+            month: 'short',
+            day: '2-digit',
+        };
+        return date.toLocaleDateString('en-US', options);
+    };
 
-
-
-const PlayersCarousel = ({ teamData, playersStats, handlePlayerSelect }) => {
-    const [selectedPlayer, setSelectedPlayer] = useState(null);
-
-    const handleCarouselPlayerSelect = (playerId) => {
-        setSelectedPlayer(playerId);
-        handlePlayerSelect(playerId);
+    const handleCarouselPlayerSelect = (selectedIndex) => {
+        handlePlayerSelect(selectedIndex === 0 ? null : playersStats[selectedIndex - 1].id);
     };
 
     return (
-        <>
-            <Carousel indicators={false} fade>
-                {playersStats?.map((player) => (
-                    <Carousel.Item key={player.id}>
+        <Carousel
+            className="custom-carousel"
+            interval={null}
+            fade
+            activeIndex={selectedPlayerIndex}
+            onSelect={handleCarouselPlayerSelect}
+            indicators={false}
+        >
+            <Carousel.Item key="team">
+
+                {teamData ? (
+                    <>
+                        <h4>ALL TEAM</h4>
                         <div className="image-container">
-                            <img
-                                className="slider-img"
-                                src={player.avatar || require('../../assets/placeholder.png')}
-                                alt={player.firstName}
-                            />
+                            <img className="d-block slider-img" src={teamData.logo || placeholderImg} alt={teamData.name} />
                         </div>
-                        <div
-                            className={`player ${selectedPlayer === player.id ? 'active' : ''}`}
-                            onClick={() => handleCarouselPlayerSelect(player.id)}
-                        ></div>
                         <Carousel.Caption>
-                            <h4>{player.firstName} {player.lastName}</h4>
-                            <h6>Number {player.number}</h6>
+                            <h4>{teamData.name} vs {gameData.awayTeamName}</h4>
+                            <h6>{getFormattedDate(gameData.date)}</h6>
                         </Carousel.Caption>
-                    </Carousel.Item>
-                ))}
-            </Carousel>
-        </>
+                    </>
+                ) : (
+                    <Carousel.Caption>
+                        <h4>Team Data Unavailable</h4>
+                    </Carousel.Caption>
+                )}
+            </Carousel.Item>
+            {playersStats?.map((player, index) => (
+                <Carousel.Item key={player.id} className={selectedPlayerIndex === index ? 'selected' : ''}>
+                    <h4 className='invisible'>ALL TEAM</h4>
+                    <div className="image-container">
+                        <img className="d-block slider-img" src={player.avatar || placeholderImg} alt={player.firstName} />
+                    </div>
+                    <Carousel.Caption>
+                        <h4>{player.firstName} {player.lastName}</h4>
+                        {player.number ? <h6>Number {player.number}</h6> : <h6 className='invisible'>Number</h6>}
+                    </Carousel.Caption>
+                </Carousel.Item>
+            ))}
+        </Carousel>
     );
 };
 
