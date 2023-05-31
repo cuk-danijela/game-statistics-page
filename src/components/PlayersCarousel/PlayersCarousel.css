@@ -1,10 +1,10 @@
 .image-container {
     display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100%;
-        position: relative;
-        margin: 4rem 0;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    position: relative;
+    margin: 4rem 0;
 }
 
 .slider-img {
@@ -12,15 +12,22 @@
     height: 150px;
     border-radius: 50%;
     padding: 20px;
-    background-color: #5b555b;
+    background-color: #59565a24;
 }
-.custom-carousel{
-        width: 450px;
-        margin: 0 auto;
+
+.custom-carousel {
+    width: 450px;
+    margin: 0 auto;
 }
+
+.carousel-item h6,
+.carousel-item h4 {
+    font-weight: 300;
+}
+
 .carousel-caption {
     position: relative;
-        right: 0;
-            bottom: 0;
-            left: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
 }

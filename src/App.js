@@ -5,7 +5,8 @@ import PlayersCarousel from "./components/PlayersCarousel/PlayersCarousel";
 import TeamStatistics from "./components/TeamStatistics/TeamStatistics";
 
 function App() {
-  const [playersStats, setPlayersStats] = useState(null);
+
+  const [playersStats, setPlayersStats] = useState([]);
   const [teamData, setTeamData] = useState(null);
   const [gameData, setGameData] = useState(null);
   const [selectedPlayerId, setSelectedPlayer] = useState(null);
@@ -48,11 +49,13 @@ function App() {
       <div className="grid-item donuts">Donuts Placeholder</div>
       <div className="grid-item court">Court Placeholder</div>
       <div className="grid-item bars">Bars Placeholder</div>
-      <TeamStatistics
-        playersStats={playersStats}
-        teamData={teamData}
-        selectedPlayerId={selectedPlayerId}
-      />
+      {teamData && (
+        <TeamStatistics
+          playersStats={playersStats}
+          teamData={{ logo: teamData.logo }}
+          selectedPlayerId={selectedPlayerId}
+        />
+      )}
     </div>
   );
 }

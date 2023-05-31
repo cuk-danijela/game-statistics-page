@@ -4,11 +4,13 @@ import './PlayersCarousel.css';
 import placeholderImg from '../../assets/placeholder.png';
 
 const PlayersCarousel = ({ teamData, gameData, playersStats, selectedPlayerIndex, handlePlayerSelect }) => {
+    
     const getFormattedDate = (dateStr) => {
         const date = new Date(dateStr);
         const options = {
             month: 'short',
             day: '2-digit',
+            year: '2-digit'
         };
         return date.toLocaleDateString('en-US', options);
     };
@@ -30,13 +32,13 @@ const PlayersCarousel = ({ teamData, gameData, playersStats, selectedPlayerIndex
 
                 {teamData ? (
                     <>
-                        <h4>ALL TEAM</h4>
+                        <h6>ALL TEAM</h6>
                         <div className="image-container">
                             <img className="d-block slider-img" src={teamData.logo || placeholderImg} alt={teamData.name} />
                         </div>
                         <Carousel.Caption>
-                            <h4>{teamData.name} vs {gameData.awayTeamName}</h4>
-                            <h6>{getFormattedDate(gameData.date)}</h6>
+                            <h4>{teamData.name} VS {gameData.awayTeamName}</h4>
+                            <h6 className='text-secondary'>{getFormattedDate(gameData.date)}</h6>
                         </Carousel.Caption>
                     </>
                 ) : (
@@ -47,13 +49,13 @@ const PlayersCarousel = ({ teamData, gameData, playersStats, selectedPlayerIndex
             </Carousel.Item>
             {playersStats?.map((player, index) => (
                 <Carousel.Item key={player.id} className={selectedPlayerIndex === index ? 'selected' : ''}>
-                    <h4 className='invisible'>ALL TEAM</h4>
+                    <h6 className='invisible'>ALL TEAM</h6>
                     <div className="image-container">
                         <img className="d-block slider-img" src={player.avatar || placeholderImg} alt={player.firstName} />
                     </div>
                     <Carousel.Caption>
                         <h4>{player.firstName} {player.lastName}</h4>
-                        {player.number ? <h6>Number {player.number}</h6> : <h6 className='invisible'>Number</h6>}
+                        {player.number ? <h6 className='text-secondary'>Number {player.number}</h6> : <h6 className='invisible'>Number</h6>}
                     </Carousel.Caption>
                 </Carousel.Item>
             ))}

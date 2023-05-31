@@ -2,10 +2,8 @@ import React, { useState } from 'react';
 import './TeamStatistics.css';
 
 const TeamStatistics = ({ playersStats, teamData, selectedPlayerId }) => {
-
     const [sortColumn, setSortColumn] = useState('');
     const [sortOrder, setSortOrder] = useState('');
-
 
     const getInitials = (firstName, lastName) => {
         const firstInitial = firstName ? firstName.charAt(0) : '';
@@ -33,15 +31,21 @@ const TeamStatistics = ({ playersStats, teamData, selectedPlayerId }) => {
         const sortedStats = [...playersStats];
 
         sortedStats.sort((a, b) => {
-            const totalA =
-                (a.stats['3PTS'] || 0) + (a.stats.FT || 0) + (a.stats.FG || 0);
-            const totalB =
-                (b.stats['3PTS'] || 0) + (b.stats.FT || 0) + (b.stats.FG || 0);
+            let columnA = 0;
+            let columnB = 0;
+
+            if (sortColumn === 'PTS') {
+                columnA = (a.stats['3 PTS'] || 0) + (a.stats.FT || 0) + (a.stats.FG || 0);
+                columnB = (b.stats['3 PTS'] || 0) + (b.stats.FT || 0) + (b.stats.FG || 0);
+            } else {
+                columnA = a.stats[sortColumn] || 0;
+                columnB = b.stats[sortColumn] || 0;
+            }
 
             if (sortOrder === 'asc') {
-                return totalA - totalB;
+                return columnA - columnB;
             } else {
-                return totalB - totalA;
+                return columnB - columnA;
             }
         });
 
@@ -49,45 +53,35 @@ const TeamStatistics = ({ playersStats, teamData, selectedPlayerId }) => {
     };
 
     const calculateTeamStats = () => {
-        let totalPTS = 0;
-        let totalFT = 0;
-        let totalFG = 0;
-        let total3PTS = 0;
-        let totalAST = 0;
-        let totalOR = 0;
-        let totalDR = 0;
-        let totalTO = 0;
-        let totalSTL = 0;
-        let totalBS = 0;
+        let teamStats = {
+            PTS: 0,
+            FT: 0,
+            FG: 0,
+            '3 PTS': 0,
+            AST: 0,
+            'O/R': 0,
+            'D/R': 0,
+            'T/O': 0,
+            STL: 0,
+            BS: 0
+        };
 
         if (playersStats) {
             playersStats.forEach((player) => {
-                const pts = (player.stats['3PTS'] || 0) + (player.stats.FT || 0) + (player.stats.FG || 0);
-                totalPTS += pts;
-                totalFT += player.stats.FT || 0;
-                totalFG += player.stats.FG || 0;
-                total3PTS += player.stats['3PTS'] || 0;
-                totalAST += player.stats.AST || 0;
-                totalOR += player.stats['O/R'] || 0;
-                totalDR += player.stats['D/R'] || 0;
-                totalTO += player.stats['T/O'] || 0;
-                totalSTL += player.stats.STL || 0;
-                totalBS += player.stats.BS || 0;
+                teamStats.PTS += (player.stats['3 PTS'] || 0) + (player.stats.FT || 0) + (player.stats.FG || 0);
+                teamStats.FT += player.stats.FT || 0;
+                teamStats.FG += player.stats.FG || 0;
+                teamStats['3 PTS'] += player.stats['3 PTS'] || 0;
+                teamStats.AST += player.stats.AST || 0;
+                teamStats['O/R'] += player.stats['O/R'] || 0;
+                teamStats['D/R'] += player.stats['D/R'] || 0;
+                teamStats['T/O'] += player.stats['T/O'] || 0;
+                teamStats.STL += player.stats.STL || 0;
+                teamStats.BS += player.stats.BS || 0;
             });
         }
 
-        return {
-            totalPTS,
-            totalFT,
-            totalFG,
-            total3PTS,
-            totalAST,
-            totalOR,
-            totalDR,
-            totalTO,
-            totalSTL,
-            totalBS,
-        };
+        return teamStats;
     };
 
     const teamStats = calculateTeamStats();
@@ -111,8 +105,8 @@ const TeamStatistics = ({ playersStats, teamData, selectedPlayerId }) => {
                             <th className="sortable" onClick={() => handleSort('FG')}>
                                 FG {sortArrow('FG')}
                             </th>
-                            <th className="sortable" onClick={() => handleSort('3PTS')}>
-                                3 PTS {sortArrow('3PTS')}
+                            <th className="sortable" onClick={() => handleSort('3 PTS')}>
+                                3 PTS {sortArrow('3 PTS')}
                             </th>
                             <th className="sortable" onClick={() => handleSort('AST')}>
                                 AST {sortArrow('AST')}
@@ -138,53 +132,47 @@ const TeamStatistics = ({ playersStats, teamData, selectedPlayerId }) => {
                         <tr>
                             <td></td>
                             <td>
-                                <img src={teamData.logo} alt="Team Logo" className="avatar" />
+                                <img src={teamData && teamData.logo} alt="Team Logo" className="avatar" />
                             </td>
-                            <td className="align-left">{teamData.name}</td>
-                            <td>{teamStats.totalPTS}</td>
-                            <td>{teamStats.totalFT}</td>
-                            <td>{teamStats.totalFG}</td>
-                            <td>{teamStats.total3PTS}</td>
-                            <td>{teamStats.totalAST}</td>
-                            <td>{teamStats.totalOR}</td>
-                            <td>{teamStats.totalDR}</td>
-                            <td>{teamStats.totalTO}</td>
-                            <td>{teamStats.totalSTL}</td>
-                            <td>{teamStats.totalBS}</td>
+                            <td className="align-left">{teamData && teamData.name}</td>
+                            <td>{teamStats.PTS}</td>
+                            <td>{teamStats.FT}</td>
+                            <td>{teamStats.FG}</td>
+                            <td>{teamStats['3 PTS']}</td>
+                            <td>{teamStats.AST}</td>
+                            <td>{teamStats['O/R']}</td>
+                            <td>{teamStats['D/R']}</td>
+                            <td>{teamStats['T/O']}</td>
+                            <td>{teamStats.STL}</td>
+                            <td>{teamStats.BS}</td>
                         </tr>
-                        {playersStats?.map((player) => (
+                        {sortedPlayersStats.map((player) => (
                             <tr key={player.id} className={selectedPlayerId === player.id ? 'selected' : ''}>
                                 <td>{player.number && <div className="num">{player.number}</div>}</td>
                                 <td>
                                     {player.avatar ? (
                                         <img src={player.avatar} alt="avatar" className="avatar" />
                                     ) : (
-                                        <div className="no-avatar">
-                                            {getInitials(player.firstName, player.lastName)}
-                                        </div>
+                                        <div className="no-avatar">{getInitials(player.firstName, player.lastName)}</div>
                                     )}
                                 </td>
-                                <td className="align-left">{player.firstName} {player.lastName}</td>
-                                <td>
-                                    {player.stats['3PTS'] !== undefined && player.stats.FT !== undefined && player.stats.FG !== undefined
-                                        ? (player.stats['3PTS'] || 0) + (player.stats.FT || 0) + (player.stats.FG || 0)
-                                        : '-'}
-                                </td>
-                                <td>{player.stats.FT || '-'}</td>
-                                <td>{player.stats.FG || '-'}</td>
-                                <td>{player.stats['3PTS'] || '-'}</td>
-                                <td>{player.stats.AST || '-'}</td>
-                                <td>{player.stats['O/R'] || '-'}</td>
-                                <td>{player.stats['D/R'] || '-'}</td>
-                                <td>{player.stats['T/O'] || '-'}</td>
-                                <td>{player.stats.STL || '-'}</td>
-                                <td>{player.stats.BS || '-'}</td>
+                                <td className="align-left">{`${player.firstName} ${player.lastName}`}</td>
+                                <td>{(player.stats['3 PTS'] || 0) + (player.stats.FT || 0) + (player.stats.FG || 0)}</td>
+                                <td>{player.stats.FT || 0}</td>
+                                <td>{player.stats.FG || 0}</td>
+                                <td>{player.stats['3 PTS'] || 0}</td>
+                                <td>{player.stats.AST || 0}</td>
+                                <td>{player.stats['O/R'] || 0}</td>
+                                <td>{player.stats['D/R'] || 0}</td>
+                                <td>{player.stats['T/O'] || 0}</td>
+                                <td>{player.stats.STL || 0}</td>
+                                <td>{player.stats.BS || 0}</td>
                             </tr>
                         ))}
                     </tbody>
                 </table>
             ) : (
-                <div>No player statistics available</div>
+                <div>Loading...</div>
             )}
         </>
     );

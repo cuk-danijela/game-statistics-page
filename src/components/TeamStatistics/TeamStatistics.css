@@ -45,7 +45,7 @@ tr:nth-child(even) {
     align-items: center;
     justify-content: center;
     color: #000000;
-    background: #FFFFFF;
+    background: #adb5bd;
 }
 
 .avatar {
@@ -73,6 +73,7 @@ tr:nth-child(even) {
 .align-left {
     text-align: left;
 }
+
 .selected {
     background-color: #1dc0a699 !important;
 }
